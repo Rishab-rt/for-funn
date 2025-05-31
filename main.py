@@ -30,6 +30,7 @@ def handCricket(overs):
                 botBalls-=1
                 if botScore>userScore:
                     print("Sorry, the Bot beat you with",botBalls,"left")
+                    exit()
                 if botplay == userPlay:
                     print("Bot is out! Congratulations, you win by",userScore-botScore)
                     exit()
@@ -41,7 +42,7 @@ def handCricket(overs):
                 exit()
                 
         else:
-            while botBalls>0:
+            while True:
                 userPlay = int(input("Bowl!: "))
                 botplay = random.randint(0,6)
                 botBalls-=1
@@ -51,11 +52,11 @@ def handCricket(overs):
                 else:
                     botScore += botplay
                     print("Current score is",botScore,"in",totalBalls-botBalls,"balls with",botBalls,"balls remaining")
-           
-            while ballsLeft>0:
+            print("Innings is done, you have to chase",botScore+1)
+            while True:
                 userPlay = int(input("Bat!: "))
                 botplay = random.randint(0,6)
-                botBalls-=1
+                ballsLeft-=1
                 if botplay == userPlay:
                     print("You lost by",botScore-userScore)
                     exit()
@@ -78,7 +79,7 @@ def handCricket(overs):
                 else:
                     botScore += botplay
                     print("Current score is",botScore,"in",totalBalls-botBalls,"balls with",botBalls,"balls remaining")
-                    
+            print("You have to chase: ",botScore)       
             while ballsLeft>=0:
                 userPlay = int(input("Bat!: "))
                 botplay = random.randint(0,6)
@@ -99,16 +100,18 @@ def handCricket(overs):
                 botplay = random.randint(0,6)
                 ballsLeft-=1
                 if botplay == userPlay:
-                    print("You are out. Score:",userScore)
+                    print("You are out and have to defend a score of:",userScore)
                     break
                 else:
                     userScore += userPlay
                     print("Current score is",userScore,"in",totalBalls-ballsLeft,"balls with",ballsLeft,"balls remaining")
-                
+            print("You have to defend a score of:",userScore)    
            
             while botBalls>0:
                 userPlay = int(input("Bowl!: "))
                 botplay = random.randint(0,6)
+                if botBalls == 0:
+                    print("Congratulations! You beat the bot by",userScore-botScore,"runs")
                 botBalls-=1
                 if botplay == userPlay:
                     print("Congratulations! You beat the bot by",userScore-botScore)
@@ -118,6 +121,9 @@ def handCricket(overs):
                     if userScore < botScore:
                         print("Sorry, you lost to the bot")
                         exit()
+                    else:
+                        print("Current score is",botScore,"in",totalBalls-botBalls,"balls with",botBalls,"balls remaining")
+                            
 
 time = int(input("How many overs would you like to play?: "))
 handCricket(time)
